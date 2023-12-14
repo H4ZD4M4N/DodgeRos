@@ -10,6 +10,7 @@ func _on_hud_start_game():
 	await get_tree().create_timer(2).timeout
 	$ScoreTimer.start()
 	$MusicPlayer.play()
+	$Pause.pausable = true
 
 func _on_player_hit():
 	$ScoreTimer.stop()
@@ -18,6 +19,7 @@ func _on_player_hit():
 	$HUD.game_over()
 	$EnemySpawner.stop_spawning()
 	get_tree().call_group("enemy", "queue_free")
+	$Pause.pausable = false
 
 func _on_score_timer_timeout():
 	score += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bic1ccpq2wse1"]
+[gd_scene load_steps=13 format=3 uid="uid://bic1ccpq2wse1"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_gisk4"]
 [ext_resource type="PackedScene" uid="uid://bgmh4q4aivutc" path="res://Scenes/player.tscn" id="1_ii54i"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://xwgbxv0t2nej" path="res://Sounds/RosDeath_3.wav" id="9_355wv"]
 [ext_resource type="AudioStream" uid="uid://cx8pygmik8k5s" path="res://Sounds/gameover.wav" id="10_lc1pa"]
 [ext_resource type="Script" path="res://Scripts/GameOverSound.gd" id="11_a084r"]
+[ext_resource type="Script" path="res://Scripts/Pause.gd" id="12_8662r"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gisk4")
@@ -47,6 +48,9 @@ death_sounds = [ExtResource("7_ijivl"), ExtResource("8_4svea"), ExtResource("9_3
 stream = ExtResource("10_lc1pa")
 volume_db = 5.0
 script = ExtResource("11_a084r")
+
+[node name="Pause" type="Node2D" parent="."]
+script = ExtResource("12_8662r")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
