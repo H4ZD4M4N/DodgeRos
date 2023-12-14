@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw5xmt14sfpr3"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y3mn1"]
+[ext_resource type="Texture2D" uid="uid://b7q8wk4y5h70p" path="res://Art/Powerpoint Logo.png" id="2_4x75j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aum6o"]
+radius = 47.0106
+
+[node name="Enemy_Excel" type="RigidBody2D" groups=["enemy"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_y3mn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_4x75j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aum6o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.66893e-06)
+scale = Vector2(5.1, 4.8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

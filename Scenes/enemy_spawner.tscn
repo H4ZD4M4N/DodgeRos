@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bht0ahhal41op"]
+
+[ext_resource type="Script" path="res://Scripts/EnemySpawner.gd" id="1_e5xp4"]
+[ext_resource type="PackedScene" uid="uid://b5040i71iwhaw" path="res://Scenes/enemy_teams.tscn" id="2_6ltnv"]
+[ext_resource type="PackedScene" uid="uid://db60qdbcsyt8v" path="res://Scenes/enemy_excel.tscn" id="3_inbeg"]
+[ext_resource type="PackedScene" uid="uid://jlrgdqln63fc" path="res://Scenes/enemy_outlook.tscn" id="4_04hqy"]
+[ext_resource type="PackedScene" uid="uid://bw5xmt14sfpr3" path="res://Scenes/enemy_powerpoint.tscn" id="5_ontdc"]
+
+[sub_resource type="Curve2D" id="Curve2D_tl8ax"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -50, -50, 0, 0, 0, 0, 1330, -50, 0, 0, 0, 0, 1330, 770, 0, 0, 0, 0, -50, 770, 0, 0, 0, 0, -50, -50)
+}
+point_count = 5
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_e5xp4")
+enemies = Array[PackedScene]([ExtResource("2_6ltnv"), ExtResource("3_inbeg"), ExtResource("4_04hqy"), ExtResource("5_ontdc")])
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SpawnLocation" type="Marker2D" parent="."]
+position = Vector2(830, 271)
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_tl8ax")
+
+[node name="SpawnPathFollower" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-50, -50)
+
+[node name="LevelUpTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]

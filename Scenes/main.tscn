@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://bic1ccpq2wse1"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_gisk4"]
+[ext_resource type="PackedScene" uid="uid://bgmh4q4aivutc" path="res://Scenes/player.tscn" id="1_ii54i"]
+[ext_resource type="PackedScene" uid="uid://bht0ahhal41op" path="res://Scenes/enemy_spawner.tscn" id="3_odcu3"]
+[ext_resource type="PackedScene" uid="uid://g72nfj4kot5g" path="res://Scenes/hud.tscn" id="4_5jsgq"]
+[ext_resource type="AudioStream" uid="uid://8v1f6kcap4gy" path="res://Sounds/2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.mp3" id="5_qeknk"]
+[ext_resource type="Script" path="res://Scripts/DeathSound.gd" id="6_oju1e"]
+[ext_resource type="AudioStream" uid="uid://dk5t5vtjxpbve" path="res://Sounds/RosDeath_1.wav" id="7_ijivl"]
+[ext_resource type="AudioStream" uid="uid://fotu6fw5nwve" path="res://Sounds/RosDeath_2.wav" id="8_4svea"]
+[ext_resource type="AudioStream" uid="uid://xwgbxv0t2nej" path="res://Sounds/RosDeath_3.wav" id="9_355wv"]
+[ext_resource type="AudioStream" uid="uid://cx8pygmik8k5s" path="res://Sounds/gameover.wav" id="10_lc1pa"]
+[ext_resource type="Script" path="res://Scripts/GameOverSound.gd" id="11_a084r"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_gisk4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_odcu3")]
+
+[node name="Player" parent="." instance=ExtResource("1_ii54i")]
+position = Vector2(567, 314)
+
+[node name="HUD" parent="." instance=ExtResource("4_5jsgq")]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qeknk")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = 15.0
+script = ExtResource("6_oju1e")
+death_sounds = [ExtResource("7_ijivl"), ExtResource("8_4svea"), ExtResource("9_355wv")]
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_lc1pa")
+volume_db = 5.0
+script = ExtResource("11_a084r")
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="finished" from="DeathSound" to="GameOverSound" method="_on_death_sound_finished"]

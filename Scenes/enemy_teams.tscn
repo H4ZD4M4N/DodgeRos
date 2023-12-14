@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5040i71iwhaw"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_j3u2s"]
+[ext_resource type="Texture2D" uid="uid://bw07k7wup027j" path="res://Art/Teams Logo.png" id="1_s6iq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aum6o"]
+radius = 44.1022
+
+[node name="Enemy_Teams" type="RigidBody2D" groups=["enemy"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_j3u2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_s6iq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aum6o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(5.1, 4.8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

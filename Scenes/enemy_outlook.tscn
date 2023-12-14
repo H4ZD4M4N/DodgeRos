@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://jlrgdqln63fc"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_r0e1i"]
+[ext_resource type="Texture2D" uid="uid://dqjnoiucx40fa" path="res://Art/Outlook Logo.png" id="2_7oguc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aum6o"]
+radius = 44.1022
+
+[node name="Enemy_Outlook" type="RigidBody2D" groups=["enemy"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_r0e1i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7oguc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aum6o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, -1.90735e-06)
+scale = Vector2(5.15, 4.8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

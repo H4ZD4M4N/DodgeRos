@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://db60qdbcsyt8v"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_qlgv5"]
+[ext_resource type="Texture2D" uid="uid://b7ir0fm8kennt" path="res://Art/Excel Logo.png" id="2_1njp5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aum6o"]
+radius = 47.0106
+
+[node name="Enemy_Excel" type="RigidBody2D" groups=["enemy"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_qlgv5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_1njp5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aum6o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 5.72205e-06)
+scale = Vector2(5.1, 4.7)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
