@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://g72nfj4kot5g"]
+[gd_scene load_steps=6 format=3 uid="uid://g72nfj4kot5g"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_0gjkj"]
 [ext_resource type="FontFile" uid="uid://cdr6ronljbh13" path="res://Fonts/Font_Exo2.ttf" id="2_knifm"]
 [ext_resource type="PackedScene" uid="uid://ds3eehmkkplme" path="res://Scenes/options_menu.tscn" id="3_7rem6"]
+[ext_resource type="Texture2D" uid="uid://c7f1t520e1v41" path="res://Art/SettingsIcon.png" id="3_wpevo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_046aa"]
 
@@ -65,18 +66,24 @@ one_shot = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -8.0
-offset_bottom = 8.0
+offset_left = -64.0
+offset_top = 8.0
+offset_right = 448.0
+offset_bottom = 520.0
 grow_horizontal = 0
+scale = Vector2(0.1, 0.1)
 theme_override_colors/font_color = Color(0, 0, 0, 0.588235)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 0.588235)
-theme_override_font_sizes/font_size = 75
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 0.588235)
+theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxEmpty_046aa")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_046aa")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_046aa")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_046aa")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_046aa")
-text = "⚙️"
+icon = ExtResource("3_wpevo")
 
 [node name="OptionsMenu" parent="." instance=ExtResource("3_7rem6")]
 visible = false
