@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://g72nfj4kot5g"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_0gjkj"]
+[ext_resource type="FontFile" uid="uid://cdr6ronljbh13" path="res://Fonts/Font_Exo2.ttf" id="2_knifm"]
+[ext_resource type="PackedScene" uid="uid://ds3eehmkkplme" path="res://Scenes/options_menu.tscn" id="3_7rem6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_046aa"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_0gjkj")
+
+[node name="ScoreText" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_knifm")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChangableText" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.0
+offset_top = -110.0
+offset_right = 242.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_knifm")
+theme_override_font_sizes/font_size = 125
+text = "DodgeRos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.5
+offset_top = -170.0
+offset_right = 169.5
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_knifm")
+theme_override_font_sizes/font_size = 100
+text = " START "
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SettingsButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 0.588235)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0.588235)
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxEmpty_046aa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_046aa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_046aa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_046aa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_046aa")
+text = "⚙️"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_7rem6")]
+visible = false
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="options_exit" from="OptionsMenu" to="." method="_on_options_menu_options_exit"]

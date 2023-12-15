@@ -2,6 +2,12 @@ extends CanvasLayer
 
 signal start_game
 
+var pauser
+
+func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	pauser = get_node("/root/Main/Pause")
+
 func _on_start_button_pressed():
 	$StartButton.hide()
 	update_message("GET READY!")
@@ -28,3 +34,14 @@ func update_score(score):
 
 func _on_message_timer_timeout():
 	$ChangableText.hide()
+
+func _on_settings_button_pressed():
+	$OptionsMenu.show()
+	$OptionsMenu.set_process(true)
+	if !get_tree().paused:
+		pauser.toggle_pause()
+
+func _on_options_menu_options_exit():
+	$OptionsMenu.hide()
+	if get_tree().paused:
+		pauser.toggle_pause()
